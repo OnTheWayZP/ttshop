@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/mbgenernator/mbgenernator.iml" filepath="$PROJECT_DIR$/mbgenernator/mbgenernator.iml" />
       <module fileurl="file://$PROJECT_DIR$/tt-common/tt-common.iml" filepath="$PROJECT_DIR$/tt-common/tt-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/tt-manager/tt-manager.iml" filepath="$PROJECT_DIR$/tt-manager/tt-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/tt-manager/tt-manager-dao/tt-manager-dao.iml" filepath="$PROJECT_DIR$/tt-manager/tt-manager-dao/tt-manager-dao.iml" />

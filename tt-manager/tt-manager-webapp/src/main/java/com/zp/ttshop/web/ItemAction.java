@@ -4,7 +4,9 @@ import com.zp.common.Order;
 import com.zp.common.Page;
 import com.zp.common.Result;
 import com.zp.ttshop.ItemService;
+import com.zp.ttshop.pojo.po.TbItem;
 import com.zp.ttshop.pojo.vo.TbItemCatCustom;
+import com.zp.ttshop.pojo.vo.TbItemQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -34,8 +36,8 @@ public class ItemAction {
 //    }
     @ResponseBody
     @RequestMapping("/items")
-    public Result<TbItemCatCustom> listItemsCustom(Page page,Order order){
-        return itemService.findItemCatByPage(page,order);
+    public Result<TbItemCatCustom> listItemsCustom(Page page, Order order, TbItemQuery tbItemQuery){
+        return itemService.findItemCatByPage(page,order,tbItemQuery);
     }
     @ResponseBody
     @RequestMapping(value = "/items/batch",method = RequestMethod.POST)
@@ -51,5 +53,11 @@ public class ItemAction {
     @RequestMapping(value = "/items/down",method = RequestMethod.POST)
     public int modifyItemsDown(@RequestParam("ids[]") List<Long> ids){
         return itemService.modifyItemsDown(ids);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/item",method = RequestMethod.POST)
+    public int saveItem(TbItem tbItem,String content){
+        return itemService.saveItem(tbItem,content);
     }
 }

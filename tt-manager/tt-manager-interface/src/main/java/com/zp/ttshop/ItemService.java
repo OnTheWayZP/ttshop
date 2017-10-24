@@ -5,6 +5,7 @@ import com.zp.common.Page;
 import com.zp.common.Result;
 import com.zp.ttshop.pojo.po.TbItem;
 import com.zp.ttshop.pojo.vo.TbItemCatCustom;
+import com.zp.ttshop.pojo.vo.TbItemQuery;
 
 import java.util.List;
 
@@ -17,8 +18,9 @@ import java.util.List;
 
 public interface ItemService {
         public Result<TbItem> findItemByPage(Page page);
-        public Result<TbItemCatCustom> findItemCatByPage(Page page, Order order);
+        public Result<TbItemCatCustom> findItemCatByPage(Page page, Order order,TbItemQuery tbItemQuery);
         int modifyItems(List<Long> ids);
         int modifyItemsUp(List<Long> ids);
         int modifyItemsDown(List<Long> ids);
+        int saveItem(TbItem tbItem,String content);
 }

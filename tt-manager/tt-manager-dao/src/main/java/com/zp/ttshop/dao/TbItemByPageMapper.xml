@@ -4,7 +4,18 @@
 
 
   <sql id="Base_Column_List" >
-    i.id, i.title, i.sell_point as sellPoint, i.price, i.num, i.barcode, i.image, i.cid, i.status, i.created, i.updated,c.name
+    i.id, i.title, i.sell_point as sellPoint, i.price, i.num, i.barcode, i.image, i.cid, i.status, i.created, i.updated,c.name as catName
+  </sql>
+  <sql id="Where_Clause">
+    <where>
+      i.status != 3
+      <if test="query != null and query.title != null and query.title != ''">
+        and i.title like '%${query.title}%'
+      </if>
+      <if test="query != null and query.status != null and query.status != 0">
+        and i.status = #{query.status}
+      </if>
+    </where>
   </sql>
   <select id="selectItemByPage" resultType="com.zp.ttshop.pojo.po.TbItem" parameterType="com.zp.common.Page">
     select
@@ -17,17 +28,15 @@
   <select id="selectItemCount" resultType="long" >
     select
     count(*)
-
-    from tb_item
-    WHERE status != 3
-    order by id
+    from tb_item i
+    <include refid="Where_Clause" />
   </select>
   <select id="selectTbItemCatByPage" resultType="com.zp.ttshop.pojo.vo.TbItemCatCustom">
     select
     <include refid="Base_Column_List" />
     from tb_item i
-    left join tb_item_cat c on c.id = i.id
-    WHERE i.status != 3
+    left join tb_item_cat c on c.id = i.cid
+    <include refid="Where_Clause" />
     <choose>
       <when test="order != null and order.sort != null and order.order != null">
         <foreach collection="order.orderParams" item="item" open="order by" close="" separator=",">

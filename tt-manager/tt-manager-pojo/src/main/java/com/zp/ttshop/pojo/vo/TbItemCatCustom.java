@@ -9,13 +9,13 @@ import com.zp.ttshop.pojo.po.TbItem;
  * Version:V1.0
  */
 public class TbItemCatCustom extends TbItem {
-    String name;
+    String catName;
 
-    public String getName() {
-        return name;
+    public String getCatName() {
+        return catName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCatName(String catName) {
+        this.catName = catName;
     }
 }

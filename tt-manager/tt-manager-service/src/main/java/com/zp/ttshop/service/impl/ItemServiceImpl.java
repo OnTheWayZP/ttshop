@@ -3,15 +3,21 @@ package com.zp.ttshop.service.impl;
 import com.zp.common.Order;
 import com.zp.common.Page;
 import com.zp.common.Result;
+import com.zp.common.util.IDUtils;
 import com.zp.ttshop.ItemService;
 import com.zp.ttshop.dao.TbItemByPageMapper;
+import com.zp.ttshop.dao.TbItemDescMapper;
 import com.zp.ttshop.dao.TbItemMapper;
 import com.zp.ttshop.pojo.po.TbItem;
+import com.zp.ttshop.pojo.po.TbItemDesc;
 import com.zp.ttshop.pojo.po.TbItemExample;
 import com.zp.ttshop.pojo.vo.TbItemCatCustom;
+import com.zp.ttshop.pojo.vo.TbItemQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,24 +34,26 @@ public class ItemServiceImpl implements ItemService{
     TbItemByPageMapper tbItemByPageMapper;
     @Autowired
     TbItemMapper tbItemMapper;
-
+    @Autowired
+    TbItemDescMapper tbItemDescMapper;
     @Override
     public Result<TbItem> findItemByPage(Page page) {
-        long total = tbItemByPageMapper.selectItemCount();
+       // long total = tbItemByPageMapper.selectItemCount();
         List<TbItem> rows = tbItemByPageMapper.selectItemByPage(page);
         Result<TbItem> result = new Result<TbItem>();
         result.setRows(rows);
-        result.setTotal(total);
+       // result.setTotal(total);
        return result;
     }
 
     @Override
-    public Result<TbItemCatCustom> findItemCatByPage(Page page, Order order) {
+    public Result<TbItemCatCustom> findItemCatByPage(Page page, Order order,TbItemQuery tbItemQuery) {
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("page",page);
         map.put("order",order);
+        map.put("query",tbItemQuery);
         Result<TbItemCatCustom> rs = new Result<TbItemCatCustom>();
-        long total = tbItemByPageMapper.selectItemCount();
+        long total = tbItemByPageMapper.selectItemCount(map);
         List<TbItemCatCustom> rows = tbItemByPageMapper.selectTbItemCatByPage(map);
         rs.setTotal(total);
         rs.setRows(rows);
@@ -81,5 +89,23 @@ public class ItemServiceImpl implements ItemService{
         TbItemExample.Criteria criteria = tbItemExample.createCriteria();
         criteria.andIdIn(ids);
         return tbItemMapper.updateByExampleSelective(item,tbItemExample);
+    }
+
+    @Override
+    @Transactional
+    public int saveItem(TbItem tbItem, String content) {
+        long itemId = IDUtils.getItemId();
+        tbItem.setId(itemId);
+        tbItem.setStatus((byte)1);
+        tbItem.setCreated(new Date());
+        tbItem.setUpdated(new Date());
+        int counts = tbItemMapper.insert(tbItem);
+        TbItemDesc tbItemDesc = new TbItemDesc();
+        tbItemDesc.setItemId(itemId);
+        tbItemDesc.setItemDesc(content);
+        tbItemDesc.setCreated(new Date());
+        tbItemDesc.setUpdated(new Date());
+        counts += tbItemDescMapper.insert(tbItemDesc);
+        return counts;
     }
 }

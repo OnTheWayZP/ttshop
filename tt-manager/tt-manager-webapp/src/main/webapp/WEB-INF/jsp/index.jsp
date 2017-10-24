@@ -49,12 +49,19 @@
 <!-- jquery easyui -->
 <script src="js/jquery-easyui-1.5/jquery.easyui.min.js"></script>
 <script src="js/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+<!-- 导入moment.js-->
+<script src="js/moment/moment-with-locales.js"></script>
+<!--使用中文格式-->
+<script>
+    moment.locale('zh-cn');
+</script>
 <!-- 自定义脚本 -->
 <script src="js/common.js"></script>
 <!-- 自定义js -->
 <script>
     ttshop.registerMenuEvent();
 </script>
+
 
 <%--<script>--%>
     <%--$("#menu .easyui-tree").tree({--%>

@@ -318,7 +318,17 @@
                 <artifactId>freemarker</artifactId>
                 <version>${freemarker.version}</version>
             </dependency>
-
+            <!--alipay sdk-->
+            <dependency>
+                <groupId>com.alipay</groupId>
+                <artifactId>alipay-sdk-java-source</artifactId>
+                <version>20170324180803</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <version>20170324180803</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

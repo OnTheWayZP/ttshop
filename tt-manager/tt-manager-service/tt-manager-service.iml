@@ -52,6 +52,8 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.2.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.2.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.2.8.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: com.alipay:alipay-sdk-java-source:20170324180803" level="project" />
+    <orderEntry type="library" name="Maven: com.alipay:alipay-sdk-java:20170324180803" level="project" />
     <orderEntry type="module" module-name="tt-manager-interface" />
     <orderEntry type="module" module-name="tt-common" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.5" level="project" />
